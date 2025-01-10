@@ -47,6 +47,7 @@
                                             <th>Nama Karyawan</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Gaji Karyawan</th>
+                                            <th>Nama Departemen</th>
                                             <th>Alamat</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -65,6 +66,7 @@
                                             <td>{{$karyawan->nama_karyawan}}</td>
                                             <td>{{$karyawan->jenis_kelamin}}</td>
                                             <td>{{$karyawan->gaji_karyawan}}</td>
+                                            <td>{{$karyawan->departemen['nama_departemen']}}</td>
                                             <td>{{$karyawan->alamat}}</td>
 
                                             <td>

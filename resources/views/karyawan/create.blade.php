@@ -35,6 +35,14 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Departemen</label>
+                                        <select name="departemen_id" class="custom-select">
+                                            @foreach ($departemen as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama_departemen }}</option>
+                                            @endforeach
+                                        </select>
+                        </div>
+                        <div class="form-group">
                             <label for="foto" >Upload Foto Karyawan</label>
                             <input type="file" id="foto" class="form-control-file" name="foto" accept="image/*"
                                 required>

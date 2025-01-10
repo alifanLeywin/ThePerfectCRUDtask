@@ -11,4 +11,10 @@ class Departemen extends Model
     protected $table = 'departemen';
     protected $primarykey = 'kodedepartemen';
     protected $fillable = ['nama_departemen'];
+
+    public function karyawan(){
+
+
+        return $this->hasMany('App\Models\Karyawan');
+    }
 }

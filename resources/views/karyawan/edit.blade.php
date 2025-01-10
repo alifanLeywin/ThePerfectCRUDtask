@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label for="gaji_karyawan">Gaji Karyawan</label>
                             <input type="number" class="form-control" name="gaji_karyawan" value="{{ old('gaji_karyawan', $data->gaji_karyawan) }}">
-                        </div>
+                        </div>                           
 
                         {{-- Alamat --}}
                         <div class="form-group">
@@ -55,6 +55,20 @@
                                 <option value="Wanita" {{ old('jenis_kelamin', $data->jenis_kelamin) == 'Wanita' ? 'selected' : '' }}>Wanita</option>
                             </select>
                         </div>
+
+                                                <div class="form-group">
+                            <label for="departemen_id">Departemen</label>
+                            <select name="departemen_id" class="form-control">
+                                @foreach ($departemen as $item)
+                                    <option value="{{ $item->id }}" {{ old('departemen_id', $data->departemen_id) == $item->id ? 'selected' : '' }}>
+                                        {{ $item->nama_departemen }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+
+
 
                       @if($data->foto)
                       <div class="form-group">

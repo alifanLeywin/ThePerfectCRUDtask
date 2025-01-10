@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
+use App\Models\Departemen;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -25,7 +26,9 @@ class KaryawanController extends Controller
     public function create()
     {
         //
-        return view ('karyawan.create');
+        $departemen = Departemen::all();
+        
+        return view ('karyawan.create',['departemen'=>$departemen]);
     }
 
     /**
@@ -62,6 +65,7 @@ class KaryawanController extends Controller
             'alamat'=> $request->input('alamat'),
             'jenis_kelamin'=> $request->input('jenis_kelamin'),
             'foto'=> $foto_nama,
+            'departemen_id' => $request->input('departemen_id'),
         ];
 
         Karyawan::create($data);
@@ -82,8 +86,16 @@ class KaryawanController extends Controller
     public function edit($id)
     {
         //
-        $data = Karyawan::where('nip',$id)-> first();
-        return view('karyawan.edit')->with('data', $data);
+        // Mengambil data karyawan berdasarkan NIP
+    $data = Karyawan::where('nip', $id)->first();
+
+    // Mengambil semua departemen untuk pilihan dropdown
+    $departemen = Departemen::all();
+
+    // Mengirim data karyawan dan departemen ke view
+    return view('karyawan.edit', compact('data', 'departemen'));
+
+    
     }
     
     /**
@@ -97,12 +109,14 @@ class KaryawanController extends Controller
         'gaji_karyawan'=> 'required',
         'alamat'=> 'required',
         'jenis_kelamin'=> 'required',
+        'departemen_id' => 'required',
     ],[
         'nip.required' => 'NIP Wajib Diisi!',
         'nama_karyawan.required' => 'Nama Karyawan Wajib Diisi!',
         'gaji_karyawan.required' => 'Gaji Karyawan Wajib Diisi!',
         'alamat.required' => 'Alamat Karyawan Wajib Diisi!',
         'jenis_kelamin.required' => 'Data Jenis Kelamin Wajib Diisi!',
+        'departemen_id.required' => 'Departemen Wajib Diisi!',
     ]);
 
     $data = [
@@ -111,6 +125,7 @@ class KaryawanController extends Controller
         'gaji_karyawan'=> $request->gaji_karyawan,
         'alamat'=> $request->alamat,
         'jenis_kelamin'=> $request->jenis_kelamin,
+        'departemen_id' => $request->departemen_id,
     ];
 
     if($request->hasFile('foto')) {
